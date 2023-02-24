@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="workingArea"></div>
+    <script>
+      async function fetchGitHubUserDetails() {
+        const workingAreaElement = document.getElementById("workingArea");
+        for (let index = 1; index < 10; index++) {
+          const data = await fetch("https://dummyjson.com/products/" + index);
+          console.log("data::", data);
+          if (data.status === 200) {
+            const jsonData = await data.json();
+            var imgElement = document.createElement("img");
+            imgElement.id = "avatar" + index;
+            imgElement.src= jsonData.thumbnail
+            var pElement = document.createElement("p");
+            pElement.id = "demo" + index;
+            pElement.innerHTML= jsonData.title
+            workingAreaElement.append(imgElement, pElement);
+            // document.getElementById("demo0").innerHTML = jsonData.title;
+            // document.getElementById("avatar0").src = jsonData.thumbnail;
+            console.log(jsonData);
+          }
+        }
+      }
+      fetchGitHubUserDetails();
+    </script>
+  </body>
+</html>
